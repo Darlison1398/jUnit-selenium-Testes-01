@@ -31,7 +31,7 @@ public class TextAlerts {
 		// setando no textfield o texto do alert
 		driver.findElement(By.id("elementosForm:nome")).sendKeys(textoAlert);
 		
-		//driver.quit();
+		driver.quit();
 		
 	}
 	
