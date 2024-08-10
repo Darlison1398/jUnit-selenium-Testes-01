@@ -36,24 +36,20 @@ public class TesteCadastro {
 		
 		page.setNome("DARLISON");
 		page.setSobreNome("SILVA");
-		driver.findElement(By.id("elementosForm:sexo:0")).click();
-		driver.findElement(By.id("elementosForm:comidaFavorita:0")).click();
+		page.setSexoMasculino();
+		page.setComidaFavorita();
+		page.setEscolaridade("Superior");
+		page.setEsporte("Futebol");
+		page.cadastrar();
 		
-		new Select(driver.findElement(By.id("elementosForm:escolaridade")))
-		    .selectByVisibleText("Superior");
-		
-		new Select(driver.findElement(By.id("elementosForm:esportes")))
-	        .selectByVisibleText("Futebol");
-		
-		driver.findElement(By.id("elementosForm:cadastrar")).click();
-		
-		Assert.assertTrue(driver.findElement(By.id("resultado")).getText().startsWith("Cadastrado!"));
-		Assert.assertTrue(driver.findElement(By.id("descNome")).getText().endsWith("DARLISON"));
-		Assert.assertEquals("Sobrenome: SILVA", driver.findElement(By.id("descSobrenome")).getText());
-		Assert.assertEquals("Sexo: Masculino", driver.findElement(By.id("descSexo")).getText());
-		Assert.assertEquals("Comida: Carne", driver.findElement(By.id("descComida")).getText());
-		Assert.assertEquals("Escolaridade: superior", driver.findElement(By.id("descEscolaridade")).getText());
-		Assert.assertEquals("Esportes: Futebol", driver.findElement(By.id("descEsportes")).getText());
+		// obtendo resultado
+		Assert.assertTrue(page.obterResultadoCadastro().startsWith("Cadastrado!"));
+		Assert.assertTrue(page.obterNomeCadastrado().endsWith("DARLISON"));
+		Assert.assertEquals("Sobrenome: SILVA", page.obterSobreNomeCadastrado());
+		Assert.assertEquals("Sexo: Masculino", page.obterSexoCadastrado());
+		Assert.assertEquals("Comida: Carne", page.obterComidaCadastrado());
+		Assert.assertEquals("Escolaridade: superior", page.obterEscolaridadeCadastrado());
+		Assert.assertEquals("Esportes: Futebol", page.obterEsporteCadastrado());
 		
 	}
 
